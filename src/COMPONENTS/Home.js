@@ -29,18 +29,25 @@ function Home() {
   
       // return cleanup function
       return () => subscriber();
-    }, []);
+    }, [r]);
     //useeffect end
     console.log(pdf);
     
+    
    
     const upload = async ()=>{
-      if(image.size>1999999){
+      var fileName = image;
+        var extension = fileName.substring(fileName.lastIndexOf('.') + 1);
+        console.log(extension)
+      if(image.size>1000000){
         image.value=""
         alert("Hey User We Limit The File Size To 1 MB To Provide More Study Materials Please Reduce The File Size To 1MB")
+        
+      
       }
+      
       else{
-        const storageRef = storage.ref('/files');
+        const storageRef = storage.ref();
         const fileRef = storageRef.child(image.name); 
         await fileRef.put(image).then(()=>{setr('success')});
         const downloadurl=(await fileRef.getDownloadURL());
@@ -64,7 +71,7 @@ function Home() {
       <center>
         <label>
           Enter Your Study Material Name
-        <input type="text" value={name} onChange={(e)=>{
+        <input type="text" accept="application/pdf" value={name} onChange={(e)=>{
           setname(e.target.value)
         }} /></label>
       <input type="file"  className="fike" onChange={(e)=>{

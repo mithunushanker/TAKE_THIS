@@ -5,7 +5,7 @@ import book from '../Assets/book.png';
 
 function Login() {
     const signinwithgoogle=()=>{
-        auth.signInWithRedirect(provider).catch(alert)
+        auth.signInWithPopup(provider).catch(alert)
         
       };
     return (
